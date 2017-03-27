@@ -10,6 +10,8 @@ $(document).ready(function () {
 
   // answer for question
   var ans = ''
+  var playerChoice1 = 0
+  var playerChoice2 = 0
 
   //  to check who starts first(chooses the question)
   function rolls () {
@@ -42,9 +44,9 @@ $(document).ready(function () {
       var ourQn = JSON.parse(ourRequest.responseText)
       var qnPick = Math.floor(Math.random() * ourQn.length)
       ans = ourQn[qnPick].answ
-      // console.log(ourQn)
-      // console.log(qnPick)
-      // console.log(ourQn[qnPick])
+      console.log(ourQn)
+      console.log(qnPick)
+      console.log(ourQn[qnPick])
       console.log(ans)
       $('.question').text('Question:' + ourQn[qnPick].question)
       // removing question from chosen genre
@@ -66,13 +68,13 @@ $(document).ready(function () {
           var remCho = choiceList.splice(rnC, 1)
         }
       }
-      getKeys()
-    }  /* do the whole chuck of work before this close */
-    function getKeys () {
       // player1 picking the answer (qwer)
-      var playerChoice1 = 0
       $(document).keydown(function (e) {
         if (e.keyCode === 87 || e.keyCode === 81 || e.keyCode === 69 || e.keyCode === 82) {
+          if (e.keyCode === 81) { choice1 = $('#c1') }
+          if (e.keyCode === 87) { choice1 = $('#c2') }
+          if (e.keyCode === 69) { choice1 = $('#c3') }
+          if (e.keyCode === 82) { choice1 = $('#c4') }
           if (!trig1) {
             trig1 = true
             playerChoice1 = e.keyCode
@@ -83,9 +85,12 @@ $(document).ready(function () {
         }
       })
       // player 2 picking the answer(,./Lshift)
-      var playerChoice2 = 0
       $(document).keydown(function (e) {
         if (e.keyCode === 16 || e.keyCode === 191 || e.keyCode === 190 || e.keyCode === 188) {
+          if (e.keyCode === 188) { choice2 = $('#cp1') }
+          if (e.keyCode === 190) { choice2 = $('#cp2') }
+          if (e.keyCode === 191) { choice2 = $('#cp3') }
+          if (e.keyCode === 16) { choice2 = $('#cp4') }
           if (!trig2) {
             trig2 = true
             playerChoice2 = e.keyCode
@@ -95,7 +100,11 @@ $(document).ready(function () {
           }
         }
       })
-    }
+      console.log(ourQn)
+      console.log(ans)
+      console.log(playerChoice1)
+      console.log(playerChoice2)
+    }  /* do the whole chuck of work before this close */
     ourRequest.send()
   })
 
