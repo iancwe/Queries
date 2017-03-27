@@ -9,9 +9,6 @@ $(document).ready(function () {
   var p1Rolls = 0
   var p2Rolls = 0
 
-  // answer for question
-  var ans = ''
-
   //  to check who starts first(chooses the question)
   function rolls () {
     p1Rolls = Math.random()
@@ -42,7 +39,7 @@ $(document).ready(function () {
     ourRequest.onload = function () {
       var ourQn = JSON.parse(ourRequest.responseText)
       var qnPick = Math.floor(Math.random() * ourQn.length)
-      ans = ourQn[qnPick].answ
+      var ans = ourQn[qnPick].answ
       // console.log(ourQn)
       // console.log(qnPick)
       // console.log(ourQn[qnPick])
@@ -78,7 +75,6 @@ $(document).ready(function () {
           playerChoice1 = e.keyCode
           alert('player 1')
           console.log(playerChoice1)
-          return playerChoice1
         }
       }
     })
@@ -91,14 +87,10 @@ $(document).ready(function () {
           playerChoice2 = e.keyCode
           alert('player 2 ')
           console.log(playerChoice2)
-          return playerChoice2
         }
       }
     })
     // comparing player choices to answers
-    console.log(ans)
-    console.log(playerChoice1)
-    console.log(playerChoice2)
     ourRequest.send()
   })
 

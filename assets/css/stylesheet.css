@@ -10,3 +10,9 @@ h1{
 .quizArea{
   display: none;
 }
+.wrapper{
+  display: flex;
+}
+#p2{
+  display:none;
+}
