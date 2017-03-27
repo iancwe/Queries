@@ -1,0 +1,25 @@
+[{
+  "question": "Who was Singapore fourth president?",
+  "choices":["Benjamin Sheares","Wee Kim Wee","Devan Nair","Ong Teng Cheong"],
+  "answ":"Wee Kim Wee"
+},
+{
+  "question": "Who is the founder of spaceX?",
+  "choices":["Elon Musk","Richard Branson","Jeff Bezos","Peter Thiel"],
+  "answ":"Elon Musk"
+},
+{
+  "question": "Who said this quote \"it is the mark of an educated mind to be able to entertain a thought without accepting it\"",
+  "choices":["Aristotle","Socrates","Dr.seuss","Mark Twain"],
+  "answ":"Aristotle"
+},
+{
+  "question": "Who was the second person to walk on the moon?",
+  "choices":["Buzz Aldrin","Neil Armstrong","Michael Collins","Jim Lovell"],
+  "answ":"Buzz Aldrin"
+},
+{
+  "question": "How many years did Lee Kuan yew serve singapore as her prime minister since independence?",
+  "choices":["25.30 years","24.29 years","23.71 years","24.68 years"],
+  "answ":"25.30 years"
+}]

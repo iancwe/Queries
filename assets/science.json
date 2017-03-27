@@ -1,0 +1,25 @@
+[{
+  "question":"Mary's mum have 4 children. 1st child is called April, 2nd is called May, 3rd is June what is the name of the 4th child?",
+  "choices":["July","March","Mary","August"],
+  "answ":"Mary"
+},
+{
+  "question":"A bat and a ball cost 1.10, but the bat cost 1 dollar more than the ball. How much is the ball?",
+  "choices":["0.05","0.10","0.15","1.00"],
+  "answ":"0.05"
+},
+{
+  "question":"What was one of the biggest scientific discoveries of 2016?",
+  "choices":["gravitonal waves detected and recorded","Higgs Boson","Vantablack","Teixobactin"],
+  "answ":"gravitonal waves detected and recorded"
+},
+{
+  "question":"Which of the following is used in pencils?",
+  "choices":["lead","graphite","silicon","charcoal"],
+  "answ":"graphite"
+},
+{
+  "question":"What naturally occuring element is the densest?",
+  "choices":["osmium","iridium","uranium","rhenium"],
+  "answ":"osmium"
+}]
