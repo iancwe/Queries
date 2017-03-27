@@ -1,6 +1,5 @@
 $(document).ready(function () {
   console.log('jQuery up and running!')
-
   // keydown limiter
   var trig1 = false
   var trig2 = false
@@ -67,38 +66,36 @@ $(document).ready(function () {
           var remCho = choiceList.splice(rnC, 1)
         }
       }
-      // console.log(ourQn)
+      getKeys()
+    }  /* do the whole chuck of work before this close */
+    function getKeys () {
+      // player1 picking the answer (qwer)
+      var playerChoice1 = 0
+      $(document).keydown(function (e) {
+        if (e.keyCode === 87 || e.keyCode === 81 || e.keyCode === 69 || e.keyCode === 82) {
+          if (!trig1) {
+            trig1 = true
+            playerChoice1 = e.keyCode
+            alert('player 1')
+            console.log(playerChoice1)
+            return playerChoice1
+          }
+        }
+      })
+      // player 2 picking the answer(,./Lshift)
+      var playerChoice2 = 0
+      $(document).keydown(function (e) {
+        if (e.keyCode === 16 || e.keyCode === 191 || e.keyCode === 190 || e.keyCode === 188) {
+          if (!trig2) {
+            trig2 = true
+            playerChoice2 = e.keyCode
+            alert('player 2 ')
+            console.log(playerChoice2)
+            return playerChoice2
+          }
+        }
+      })
     }
-    // player1 picking the answer (qwer)
-    var playerChoice1 = 0
-    $(document).keydown(function (e) {
-      if (e.keyCode === 87 || e.keyCode === 81 || e.keyCode === 69 || e.keyCode === 82) {
-        if (!trig1) {
-          trig1 = true
-          playerChoice1 = e.keyCode
-          alert('player 1')
-          console.log(playerChoice1)
-          return playerChoice1
-        }
-      }
-    })
-    // player 2 picking the answer(,./Lshift)
-    var playerChoice2 = 0
-    $(document).keydown(function (e) {
-      if (e.keyCode === 16 || e.keyCode === 191 || e.keyCode === 190 || e.keyCode === 188) {
-        if (!trig2) {
-          trig2 = true
-          playerChoice2 = e.keyCode
-          alert('player 2 ')
-          console.log(playerChoice2)
-          return playerChoice2
-        }
-      }
-    })
-    // comparing player choices to answers
-    console.log(ans)
-    console.log(playerChoice1)
-    console.log(playerChoice2)
     ourRequest.send()
   })
 
