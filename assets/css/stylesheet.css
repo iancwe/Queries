@@ -1,0 +1,12 @@
+h1{
+  font-style: italic;
+  font-weight: bold;
+}
+
+.genres{
+  display: none;
+}
+
+.quizArea{
+  display: none;
+}

@@ -1,0 +1,26 @@
+[{
+  "question": "How many weasely kids where there in the harry potter movies?",
+  "choices":["6","7","5","8"],
+  "answ":"7"
+},
+{
+  "question": "What was Harry Potter first broom in the movie series?",
+  "choices":["Firebolt","Nimbus 2001","Thunderbolt","Nimbus 2000"],
+  "answ":"Nimbus 2000"
+},
+{
+  "question": "What movie did Robin Williams win the 1997 academy award for best supporting actor?",
+  "choices":["Good Will Hunting","Aladdin","Patch Adams","Jumanji"],
+  "answ":"Good Will Hunting"
+},
+{
+  "question": "What actress starred in Star Wars and in Léon: The Professional?",
+  "choices":["Carrie Fisher","Jennifer Lawrence","Natalie Portman","Bryce Dallas Howard"],
+  "answ":"Natalie Portman"
+},
+{
+  "question": "What was the world wide box office for The Lord of the Rings: The Return of the King?",
+  "choices":["1 Billion","1.120 Billion","547 Million","377 Million"],
+  "answ":"1.120 Billion"
+}
+]
