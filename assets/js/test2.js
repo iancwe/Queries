@@ -1,21 +1,33 @@
 $(document).ready(function () {
   console.log('jQuery up and running!')
-  // keydown limiter
+  // keydown triggers
   var trig1 = false
   var trig2 = false
   var p1ChoTrig = false
   var p2ChoTrig = false
   var ourQn = []
+  var choice1 = ''
+  var choice2 = ''
+  var id = ''
 
   // rolls(0-100) to see who starts first
   var p1Rolls = 0
   var p2Rolls = 0
 
-  // answer for question
+  // answer for question and scores
   var ans = ''
   var playerChoice1 = ''
   var playerChoice2 = ''
   var playTurn = 0
+  var p1Score = 0
+  var p2Score = 0
+
+  // button id and urls of button
+  var butUrl = {'musBtn': 'nottoosurewhatgoeshere',
+    'movBtn': 'https://wdi-sg.github.io/wdi-project-1-iancwe/assets/movieqn.json',
+    'sciBtn': 'https://wdi-sg.github.io/wdi-project-1-iancwe/assets/science.json',
+    'pplBtn': 'https://wdi-sg.github.io/wdi-project-1-iancwe/assets/famPpl.json'
+  }
 
   //  to check who starts first(chooses the question)
   function rolls () {
@@ -38,23 +50,32 @@ $(document).ready(function () {
   })
 
   // when click on any of the genres (put class for button and switch case for button id)
-  $('#movBtn').click(function () {
+  $('.genres').click(function () {
     // new page layout for quiz section
     $('.genres').hide()
     $('.field').hide()
     $('.quizArea').show()
+    $('#showP1').text('Player 1 Score: ' + p1Score)
+    $('#showP2').text('Player 2 Score: ' + p2Score)
+    id = this.id
+    var choUrl = butUrl[id]
+
+    // refreshing the triggers
+    trig1 = false
+    trig2 = false
+    p1ChoTrig = false
+    p2ChoTrig = false
+    playerChoice1 = null
+    playerChoice2 = null
+
     // extracting json data from another webpage
     var ourRequest = new XMLHttpRequest()
-    ourRequest.open('GET', 'https://wdi-sg.github.io/wdi-project-1-iancwe/assets/movieqn.json')
+    ourRequest.open('GET', choUrl)
     ourRequest.onload = function () {
       ourQn = JSON.parse(ourRequest.responseText)
       // randomizing the question to be chosen
       var qnPick = Math.floor(Math.random() * ourQn.length)
       ans = ourQn[qnPick].answ
-      // console.log(ourQn)
-      // console.log(qnPick)
-      // console.log(ourQn[qnPick])
-      // console.log(ans)
 
       // displaying question of the chosen question
       $('.question').text('Question:' + ourQn[qnPick].question)
@@ -70,6 +91,13 @@ $(document).ready(function () {
     }  /* onload functon ends here */
     ourRequest.send()
   }) /* end of button click function */
+
+  // quit game button function
+  $('#quit').on('click', function () {
+    $('.genres').show()
+    $('.field').show()
+    $('.quizArea').hide()
+  })
 
   function getKeys () {
     $(document).unbind('keydown')
@@ -121,12 +149,20 @@ $(document).ready(function () {
   function comparAns (p1, p2, sol) {
     if (p1 === sol && p2 === sol) {
       alert('Draw! everyone got it right')
+      scoreUpdate()
     } else if (p1 === sol) {
       alert('player 1 got it right')
+      console.log('p1')
+      p1Score++
+      scoreUpdate()
     } else if (p2 === sol) {
       alert('player 2 got it right')
+      alert('p2')
+      p2Score++
+      scoreUpdate()
     } else if (!(p1 === sol && p2 === sol)) {
       alert('both player got it wrong')
+      scoreUpdate()
     }
     if (nextGen() === true) {
       addQns()
@@ -156,14 +192,9 @@ $(document).ready(function () {
     p1ChoTrig = false
     p2ChoTrig = false
     playerChoice1 = null
-    // console.log(playerChoice1)
     playerChoice2 = null
-    // console.log(playerChoice2)
-    // console.log('refreshed')
-    console.log(ourQn.length)
     var qnPick = Math.floor(Math.random() * ourQn.length)
     ans = ourQn[qnPick].answ
-    // console.log(ans)
 
     // displaying question of the chosen question
     $('.question').text('Question:' + ourQn[qnPick].question)
@@ -188,7 +219,19 @@ $(document).ready(function () {
       $('.field').show()
       $('.quizArea').hide()
       $('#roll').hide()
+      $('#' + id).remove()
       return false
     }
   }
+
+  // updating scores
+  function scoreUpdate () {
+    $('#showP1').text('Player 1 Score: ' + p1Score)
+    $('#showP2').text('Player 2 Score: ' + p2Score)
+  }
+  // music test
+  function adele () {
+    document.getElementsByTagName('audio')
+  }
+  $('#musictime').click(adele)
 })

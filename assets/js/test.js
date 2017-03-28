@@ -23,7 +23,8 @@ $(document).ready(function () {
   var p2Score = 0
 
   // button id and urls of button
-  var butUrl = {'musBtn': 'nottoosurewhatgoeshere',
+  var butUrl = {
+    'musBtn': 'https://wdi-sg.github.io/wdi-project-1-iancwe/assets/music.json',
     'movBtn': 'https://wdi-sg.github.io/wdi-project-1-iancwe/assets/movieqn.json',
     'sciBtn': 'https://wdi-sg.github.io/wdi-project-1-iancwe/assets/science.json',
     'pplBtn': 'https://wdi-sg.github.io/wdi-project-1-iancwe/assets/famPpl.json'
@@ -61,12 +62,7 @@ $(document).ready(function () {
     var choUrl = butUrl[id]
 
     // refreshing the triggers
-    trig1 = false
-    trig2 = false
-    p1ChoTrig = false
-    p2ChoTrig = false
-    playerChoice1 = null
-    playerChoice2 = null
+    refresh()
 
     // extracting json data from another webpage
     var ourRequest = new XMLHttpRequest()
@@ -187,12 +183,7 @@ $(document).ready(function () {
 
   // function for repopulating the question
   function addQns () {
-    trig1 = false
-    trig2 = false
-    p1ChoTrig = false
-    p2ChoTrig = false
-    playerChoice1 = null
-    playerChoice2 = null
+    refresh()
     var qnPick = Math.floor(Math.random() * ourQn.length)
     ans = ourQn[qnPick].answ
 
@@ -229,9 +220,14 @@ $(document).ready(function () {
     $('#showP1').text('Player 1 Score: ' + p1Score)
     $('#showP2').text('Player 2 Score: ' + p2Score)
   }
-  // music test
-  function adele () {
-    document.getElementsByTagName('tagName')
+
+  // refresh trigger function
+  function refresh () {
+    trig1 = false
+    trig2 = false
+    p1ChoTrig = false
+    p2ChoTrig = false
+    playerChoice1 = null
+    playerChoice2 = null
   }
-  $('#musictime').click(adele)
 })
