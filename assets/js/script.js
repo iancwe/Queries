@@ -49,9 +49,10 @@ $(document).ready(function () {
       console.log(ourQn[qnPick])
       console.log(ans)
       $('.question').text('Question:' + ourQn[qnPick].question)
+
       // removing question from chosen genre
       var chosen = ourQn.splice(qnPick, 1)[0]
-      // console.log(chosen)
+
       // randomize the choices for each question
       choiceRandom(chosen)
       function choiceRandom (cho) {
@@ -67,8 +68,19 @@ $(document).ready(function () {
           $('#cp' + [i]).text(choiceList[rnC])
           var remCho = choiceList.splice(rnC, 1)
         }
+        alert('Press Any key to start timer!')
       }
+      // set timer or music
+      $(document).mouseover(function () {
+        getKeys()
+      })
+
       // player1 picking the answer (qwer)
+      console.log(ourQn)
+      console.log(ans)
+    }  /* do the whole chuck of work before this close */
+
+    function getKeys () {
       $(document).keydown(function (e) {
         if (e.keyCode === 87 || e.keyCode === 81 || e.keyCode === 69 || e.keyCode === 82) {
           if (e.keyCode === 81) { choice1 = $('#c1') }
@@ -100,11 +112,18 @@ $(document).ready(function () {
           }
         }
       })
-      console.log(ourQn)
-      console.log(ans)
-      console.log(playerChoice1)
-      console.log(playerChoice2)
-    }  /* do the whole chuck of work before this close */
+      // comparing player choices to answer
+      function comparAns (p1, p2, sol) {
+        if (p1 === p2 === sol) {
+          alert('Draw! everyone got it right')
+        } else if (p1 === sol) {
+          alert('player 1 got it right')
+        } else if (p2 === sol) {
+          alert(p2 === sol)
+        } else { alert('everyone got it wrong') }
+      }
+    
+    }
     ourRequest.send()
   })
 
