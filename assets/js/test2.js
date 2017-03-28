@@ -5,6 +5,7 @@ $(document).ready(function () {
   var trig2 = false
   var p1ChoTrig = false
   var p2ChoTrig = false
+  var ourQn = []
 
   // rolls(0-100) to see who starts first
   var p1Rolls = 0
@@ -14,6 +15,7 @@ $(document).ready(function () {
   var ans = ''
   var playerChoice1 = ''
   var playerChoice2 = ''
+  var playTurn = 0
 
   //  to check who starts first(chooses the question)
   function rolls () {
@@ -32,6 +34,7 @@ $(document).ready(function () {
   $('#roll').click(function () {
     rolls()
     $('.genres').show()
+    $('#roll').hide()
   })
 
   // when click on any of the genres (put class for button and switch case for button id)
@@ -44,13 +47,16 @@ $(document).ready(function () {
     var ourRequest = new XMLHttpRequest()
     ourRequest.open('GET', 'https://wdi-sg.github.io/wdi-project-1-iancwe/assets/movieqn.json')
     ourRequest.onload = function () {
-      var ourQn = JSON.parse(ourRequest.responseText)
+      ourQn = JSON.parse(ourRequest.responseText)
+      // randomizing the question to be chosen
       var qnPick = Math.floor(Math.random() * ourQn.length)
       ans = ourQn[qnPick].answ
-                        // console.log(ourQn)
-                        // console.log(qnPick)
-                        // console.log(ourQn[qnPick])
-      console.log(ans)
+      // console.log(ourQn)
+      // console.log(qnPick)
+      // console.log(ourQn[qnPick])
+      // console.log(ans)
+
+      // displaying question of the chosen question
       $('.question').text('Question:' + ourQn[qnPick].question)
 
       // removing question from chosen genre
@@ -59,13 +65,14 @@ $(document).ready(function () {
       // randomize the choices for each question
       choiceRandom(chosen)
 
-      // set timer or music
+      // getting player choices
       getKeys()
     }  /* onload functon ends here */
     ourRequest.send()
   }) /* end of button click function */
 
   function getKeys () {
+    $(document).unbind('keydown')
     $(document).on('keydown', function (e) {
       if (e.keyCode === 87 || e.keyCode === 81 || e.keyCode === 69 || e.keyCode === 82) {
         if (e.keyCode === 81) { choice1 = $('#c1') }
@@ -81,9 +88,9 @@ $(document).ready(function () {
         }
       }
     })
-    $(document).off('keyup', function (e) {})
 
   // player 2 picking the answer(,./Lshift)
+
     $(document).on('keydown', function (e) {
       if (e.keyCode === 16 || e.keyCode === 191 || e.keyCode === 190 || e.keyCode === 188) {
         if (e.keyCode === 188) { choice2 = $('#cp1') }
@@ -99,8 +106,9 @@ $(document).ready(function () {
         }
       }
     })
-    $(document).off('keyup', function (e) {})
+    playTurn++
   }
+
   // function for checking if both players made their choices
   function choiceCheck (c1, c2) {
     if (c1 && c2) {
@@ -112,13 +120,16 @@ $(document).ready(function () {
   // comparing player choices to answer
   function comparAns (p1, p2, sol) {
     if (p1 === sol && p2 === sol) {
-      console.log('Draw! everyone got it right')
+      alert('Draw! everyone got it right')
     } else if (p1 === sol) {
-      console.log('player 1 got it right')
+      alert('player 1 got it right')
     } else if (p2 === sol) {
-      console.log('player 2 got it right')
+      alert('player 2 got it right')
     } else if (!(p1 === sol && p2 === sol)) {
-      console.log('both player got it wrong')
+      alert('both player got it wrong')
+    }
+    if (nextGen() === true) {
+      addQns()
     }
   }
 
@@ -138,18 +149,46 @@ $(document).ready(function () {
     }
   }
 
-  // go back to landing page after quiz
-  $('#backItUp').click(function () {
-    $('.genres').show()
-    $('.field').show()
-    $('.quizArea').hide()
-    $('#roll').hide()
+  // function for repopulating the question
+  function addQns () {
     trig1 = false
     trig2 = false
     p1ChoTrig = false
     p2ChoTrig = false
-    var playerChoice1 = ''
-    var playerChoice2 = ''
-    console.log('refreshed')
-  })
+    playerChoice1 = null
+    // console.log(playerChoice1)
+    playerChoice2 = null
+    // console.log(playerChoice2)
+    // console.log('refreshed')
+    console.log(ourQn.length)
+    var qnPick = Math.floor(Math.random() * ourQn.length)
+    ans = ourQn[qnPick].answ
+    // console.log(ans)
+
+    // displaying question of the chosen question
+    $('.question').text('Question:' + ourQn[qnPick].question)
+
+    // removing question from chosen genre
+    var chosen = ourQn.splice(qnPick, 1)[0]
+
+    // randomize the choices for each question
+    choiceRandom(chosen)
+
+    // getting player choices
+    getKeys()
+    console.log(playTurn)
+  }
+
+  function nextGen () {
+    if (!(ourQn.length === 0)) {
+      return true
+    } else {
+      alert('Choose next genre')
+      $('.genres').show()
+      $('.field').show()
+      $('.quizArea').hide()
+      $('#roll').hide()
+      return false
+    }
+  }
 })

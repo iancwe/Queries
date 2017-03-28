@@ -1,11 +1,13 @@
 $(document).ready(function () {
   console.log('jQuery up and running!')
-  // keydown limiter
+  // keydown triggers
   var trig1 = false
   var trig2 = false
   var p1ChoTrig = false
   var p2ChoTrig = false
   var ourQn = []
+  var choice1 = ''
+  var choice2 = ''
 
   // rolls(0-100) to see who starts first
   var p1Rolls = 0
@@ -16,6 +18,13 @@ $(document).ready(function () {
   var playerChoice1 = ''
   var playerChoice2 = ''
   var playTurn = 0
+
+  // button id and urls of button
+  var butUrl = {'musBtn': 'nottoosurewhatgoeshere',
+    'movBtn': 'https://wdi-sg.github.io/wdi-project-1-iancwe/assets/movieqn.json',
+    'sciBtn': 'https://wdi-sg.github.io/wdi-project-1-iancwe/assets/science.json',
+    'pplBtn': 'https://wdi-sg.github.io/wdi-project-1-iancwe/assets/famPpl.json'
+  }
 
   //  to check who starts first(chooses the question)
   function rolls () {
@@ -34,17 +43,20 @@ $(document).ready(function () {
   $('#roll').click(function () {
     rolls()
     $('.genres').show()
+    $('#roll').hide()
   })
 
   // when click on any of the genres (put class for button and switch case for button id)
-  $('#movBtn').click(function () {
+  $('.genres').click(function () {
     // new page layout for quiz section
     $('.genres').hide()
     $('.field').hide()
     $('.quizArea').show()
+    var id = this.id
+    var choUrl = butUrl[id]
     // extracting json data from another webpage
     var ourRequest = new XMLHttpRequest()
-    ourRequest.open('GET', 'https://wdi-sg.github.io/wdi-project-1-iancwe/assets/movieqn.json')
+    ourRequest.open('GET', choUrl)
     ourRequest.onload = function () {
       ourQn = JSON.parse(ourRequest.responseText)
       // randomizing the question to be chosen
