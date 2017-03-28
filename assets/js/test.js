@@ -231,7 +231,7 @@ $(document).ready(function () {
   }
   // music test
   function adele () {
-    document.getElementById('adele').play()
+    document.getElementsByTagName('tagName')
   }
   $('#musictime').click(adele)
 })
