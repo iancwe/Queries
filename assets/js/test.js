@@ -229,4 +229,9 @@ $(document).ready(function () {
     $('#showP1').text('Player 1 Score: ' + p1Score)
     $('#showP2').text('Player 2 Score: ' + p2Score)
   }
+  // music test
+  function adele () {
+    document.getElementById('adele').play()
+  }
+  $('#musictime').click(adele)
 })
