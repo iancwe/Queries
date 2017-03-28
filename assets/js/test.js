@@ -14,11 +14,13 @@ $(document).ready(function () {
   var p1Rolls = 0
   var p2Rolls = 0
 
-  // answer for question
+  // answer for question and scores
   var ans = ''
   var playerChoice1 = ''
   var playerChoice2 = ''
   var playTurn = 0
+  var p1Score = 0
+  var p2Score = 0
 
   // button id and urls of button
   var butUrl = {'musBtn': 'nottoosurewhatgoeshere',
@@ -53,6 +55,8 @@ $(document).ready(function () {
     $('.genres').hide()
     $('.field').hide()
     $('.quizArea').show()
+    $('#showP1').text('Player 1 Score: ' + p1Score)
+    $('#showP2').text('Player 2 Score: ' + p2Score)
     id = this.id
     var choUrl = butUrl[id]
 
@@ -145,12 +149,20 @@ $(document).ready(function () {
   function comparAns (p1, p2, sol) {
     if (p1 === sol && p2 === sol) {
       alert('Draw! everyone got it right')
+      scoreUpdate()
     } else if (p1 === sol) {
       alert('player 1 got it right')
+      console.log('p1')
+      p1Score++
+      scoreUpdate()
     } else if (p2 === sol) {
       alert('player 2 got it right')
+      alert('p2')
+      p2Score++
+      scoreUpdate()
     } else if (!(p1 === sol && p2 === sol)) {
       alert('both player got it wrong')
+      scoreUpdate()
     }
     if (nextGen() === true) {
       addQns()
@@ -210,5 +222,11 @@ $(document).ready(function () {
       $('#' + id).remove()
       return false
     }
+  }
+
+  // updating scores
+  function scoreUpdate () {
+    $('#showP1').text('Player 1 Score: ' + p1Score)
+    $('#showP2').text('Player 2 Score: ' + p2Score)
   }
 })
