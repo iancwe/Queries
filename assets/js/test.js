@@ -8,6 +8,7 @@ $(document).ready(function () {
   var ourQn = []
   var choice1 = ''
   var choice2 = ''
+  var id = ''
 
   // rolls(0-100) to see who starts first
   var p1Rolls = 0
@@ -52,8 +53,17 @@ $(document).ready(function () {
     $('.genres').hide()
     $('.field').hide()
     $('.quizArea').show()
-    var id = this.id
+    id = this.id
     var choUrl = butUrl[id]
+
+    // refreshing the triggers
+    trig1 = false
+    trig2 = false
+    p1ChoTrig = false
+    p2ChoTrig = false
+    playerChoice1 = null
+    playerChoice2 = null
+
     // extracting json data from another webpage
     var ourRequest = new XMLHttpRequest()
     ourRequest.open('GET', choUrl)
@@ -62,10 +72,6 @@ $(document).ready(function () {
       // randomizing the question to be chosen
       var qnPick = Math.floor(Math.random() * ourQn.length)
       ans = ourQn[qnPick].answ
-      // console.log(ourQn)
-      // console.log(qnPick)
-      // console.log(ourQn[qnPick])
-      // console.log(ans)
 
       // displaying question of the chosen question
       $('.question').text('Question:' + ourQn[qnPick].question)
@@ -81,6 +87,13 @@ $(document).ready(function () {
     }  /* onload functon ends here */
     ourRequest.send()
   }) /* end of button click function */
+
+  // quit game button function
+  $('#quit').on('click', function () {
+    $('.genres').show()
+    $('.field').show()
+    $('.quizArea').hide()
+  })
 
   function getKeys () {
     $(document).unbind('keydown')
@@ -167,14 +180,9 @@ $(document).ready(function () {
     p1ChoTrig = false
     p2ChoTrig = false
     playerChoice1 = null
-    // console.log(playerChoice1)
     playerChoice2 = null
-    // console.log(playerChoice2)
-    // console.log('refreshed')
-    console.log(ourQn.length)
     var qnPick = Math.floor(Math.random() * ourQn.length)
     ans = ourQn[qnPick].answ
-    // console.log(ans)
 
     // displaying question of the chosen question
     $('.question').text('Question:' + ourQn[qnPick].question)
@@ -199,6 +207,7 @@ $(document).ready(function () {
       $('.field').show()
       $('.quizArea').hide()
       $('#roll').hide()
+      $('#' + id).remove()
       return false
     }
   }
