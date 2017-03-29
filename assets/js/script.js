@@ -77,7 +77,7 @@ $(document).ready(function () {
       var qnPick = Math.floor(Math.random() * ourQn.length)
       ans = ourQn[qnPick].answ
       var picked = ourQn.slice(qnPick, qnPick + 1)[0]
-      // console.log(picked.song)
+      console.log(picked.song)
 
       // displaying question of the chosen question and check if music cat
       if (id === 'musBtn') {
@@ -249,6 +249,7 @@ $(document).ready(function () {
     $source.src = songUrl
     console.log(songUrl)
     console.log($source)
+    document.getElementById('song').load()
     document.getElementById('song').play()
   }
 })
