@@ -116,6 +116,7 @@ $(document).ready(function () {
     $('.genres').show()
     $('.field').show()
     $('.quizArea').hide()
+    document.getElementById('song').pause()
   })
 
   function getKeys () {
