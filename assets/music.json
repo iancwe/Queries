@@ -1,25 +1,25 @@
 [{
-  "song":"./assets/media/adele.mp3",
+  "song":"./assets/media/adele.mp4",
   "choices":["Someone Like You","Rolling in the Deep", "Hello", "Chasing Pavements"],
   "answ":"Someone Like You"
 },
 {
-  "song":"./assets/media/killers.mp3",
+  "song":"./assets/media/killers.mp4",
   "choices":["Mr Brightside","Somebody Told Me", "When You Were Young", "Humans"],
   "answ":"Mr Brightside"
 },
 {
-  "song":"./assets/media/eminem.mp3",
+  "song":"./assets/media/eminem.mp4",
   "choices":["Lose Yourself","'Till I Collapse", "Without Me", "The Real Slim Shady"],
   "answ":"Lose Yourself"
 },
 {
-  "song":"./assets/media/queen.mp3",
+  "song":"./assets/media/queen.mp4",
   "choices":["We Are the Champions","Another One Bites the Dust", "Bohemian Rhapsody", "Under Pressure"],
   "answ":"We Are the Champions"
 },
 {
-  "song":"./assets/media/gaga.mp3",
+  "song":"./assets/media/gaga.mp4 ",
   "choices":["Poker Face","Just Dance", "Bad Romance", "Paparazzi"],
   "answ":"Poker Face"
 }]
