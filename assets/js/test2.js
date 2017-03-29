@@ -14,10 +14,6 @@ $(document).ready(function () {
   var p1Rolls = 0
   var p2Rolls = 0
 
-  // variables for music genre
-  var $audio = ''
-  var $source = ''
-
   // answer for question and scores
   var ans = ''
   var playerChoice1 = ''
@@ -27,8 +23,7 @@ $(document).ready(function () {
   var p2Score = 0
 
   // button id and urls of button
-  var butUrl = {
-    'musBtn': 'https://wdi-sg.github.io/wdi-project-1-iancwe/assets/music.json',
+  var butUrl = {'musBtn': 'nottoosurewhatgoeshere',
     'movBtn': 'https://wdi-sg.github.io/wdi-project-1-iancwe/assets/movieqn.json',
     'sciBtn': 'https://wdi-sg.github.io/wdi-project-1-iancwe/assets/science.json',
     'pplBtn': 'https://wdi-sg.github.io/wdi-project-1-iancwe/assets/famPpl.json'
@@ -66,7 +61,12 @@ $(document).ready(function () {
     var choUrl = butUrl[id]
 
     // refreshing the triggers
-    refresh()
+    trig1 = false
+    trig2 = false
+    p1ChoTrig = false
+    p2ChoTrig = false
+    playerChoice1 = null
+    playerChoice2 = null
 
     // extracting json data from another webpage
     var ourRequest = new XMLHttpRequest()
@@ -76,16 +76,9 @@ $(document).ready(function () {
       // randomizing the question to be chosen
       var qnPick = Math.floor(Math.random() * ourQn.length)
       ans = ourQn[qnPick].answ
-      var picked = ourQn.slice(qnPick, qnPick + 1)[0]
-      // console.log(picked.song)
 
-      // displaying question of the chosen question and check if music cat
-      if (id === 'musBtn') {
-        $('.question').text('Question: Guess the title of the song!')
-        updateSrc(picked.song)
-      } else {
-        $('.question').text('Question:' + ourQn[qnPick].question)
-      }
+      // displaying question of the chosen question
+      $('.question').text('Question:' + ourQn[qnPick].question)
 
       // removing question from chosen genre
       var chosen = ourQn.splice(qnPick, 1)[0]
@@ -194,7 +187,12 @@ $(document).ready(function () {
 
   // function for repopulating the question
   function addQns () {
-    refresh()
+    trig1 = false
+    trig2 = false
+    p1ChoTrig = false
+    p2ChoTrig = false
+    playerChoice1 = null
+    playerChoice2 = null
     var qnPick = Math.floor(Math.random() * ourQn.length)
     ans = ourQn[qnPick].answ
 
@@ -231,24 +229,9 @@ $(document).ready(function () {
     $('#showP1').text('Player 1 Score: ' + p1Score)
     $('#showP2').text('Player 2 Score: ' + p2Score)
   }
-
-  // refresh trigger function
-  function refresh () {
-    trig1 = false
-    trig2 = false
-    p1ChoTrig = false
-    p2ChoTrig = false
-    playerChoice1 = null
-    playerChoice2 = null
+  // music test
+  function adele () {
+    document.getElementsByTagName('audio')
   }
-
-  // audio tag change source function
-  function updateSrc (songUrl) {
-    $audio = $('#music')
-    $source = $('#song')
-    $source.src = songUrl
-    console.log(songUrl)
-    console.log($source)
-    document.getElementById('song').play()
-  }
+  $('#musictime').click(adele)
 })
