@@ -17,8 +17,6 @@ $(document).ready(function () {
   // variables for music genre
   var $audio = ''
   var $source = ''
-  var picked = {}
-  var chosen = {}
 
   // answer for question and scores
   var ans = ''
@@ -75,11 +73,14 @@ $(document).ready(function () {
     ourRequest.open('GET', choUrl)
     ourRequest.onload = function () {
       ourQn = JSON.parse(ourRequest.responseText)
-
       // randomizing the question to be chosen
       var qnPick = Math.floor(Math.random() * ourQn.length)
       ans = ourQn[qnPick].answ
+      console.log(ans)
       var picked = ourQn.slice(qnPick, qnPick + 1)[0]
+      console.log(picked)
+      // console.log(picked.song)
+
       // displaying question of the chosen question and check if music cat
       if (id === 'musBtn') {
         $('.question').text('Question: Guess the title of the song!')
@@ -209,37 +210,18 @@ $(document).ready(function () {
     var qnPick = Math.floor(Math.random() * ourQn.length)
     ans = ourQn[qnPick].answ
 
-    // checking if music genre or not
-    if (!(id === 'musBtn')) {
     // displaying question of the chosen question
-      $('.question').text('Question:' + ourQn[qnPick].question)
+    $('.question').text('Question:' + ourQn[qnPick].question)
 
     // removing question from chosen genre
-      var chosen = ourQn.splice(qnPick, 1)[0]
+    var chosen = ourQn.splice(qnPick, 1)[0]
 
     // randomize the choices for each question
-      choiceRandom(chosen)
+    choiceRandom(chosen)
 
     // getting player choices
-      getKeys()
-    } else {
-      $('.question').text('Question: Guess the title of the song!')
-
-      // randomizing the question to be chosen
-      var qnPick = Math.floor(Math.random() * ourQn.length)
-      ans = ourQn[qnPick].answ
-      var picked = ourQn.slice(qnPick, qnPick + 1)[0]
-
-    // removing question from chosen genre
-      var chosen = ourQn.splice(qnPick, 1)[0]
-      updateSrc(picked.song)
-
-    // randomize the choices for each question
-      choiceRandom(chosen)
-
-    // getting player choices
-      getKeys()
-    }
+    getKeys()
+    console.log(playTurn)
   }
 
   function nextGen () {
@@ -252,7 +234,6 @@ $(document).ready(function () {
       $('.quizArea').hide()
       $('#roll').hide()
       $('#' + id).remove()
-      document.getElementById('song').pause()
       return false
     }
   }
@@ -278,6 +259,8 @@ $(document).ready(function () {
     $audio = $('#music')
     $source = $('#song')[0]
     $source.src = songUrl
+    console.log(songUrl)
+    console.log($source)
     document.getElementById('song').play()
   }
 })
