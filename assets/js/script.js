@@ -224,13 +224,13 @@ $(document).ready(function () {
           title: 'Nice One, Player 2!',
           text: 'GG no rematch Player 1',
           timer: 8000
-        })
+        }, playAgain())
       } else if (p2Score <= 0) {
         swal({
           title: 'WHOOHOOO Player 1',
           text: 'Git Gud Player 2',
           timer: 8000
-        })
+        }, playAgain())
       } else {
         addQns()
         $('.bets').prop('selectedIndex', 0)
@@ -343,4 +343,12 @@ $(document).ready(function () {
   $('#closeinstrtext').click(function (event) {
     $('#instrtext').hide()
   })
+
+  // play again
+  function playAgain () {
+    $('.quizArea').hide()
+    $('.field').show()
+    $('#roll').show()
+    $('#ins').show()
+  }
 })
