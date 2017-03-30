@@ -55,6 +55,8 @@ So this game really appealed to me since I do enjoy learning more general knowle
 8. Added in the betting mechanics and the scoring system
 9. Styled up the game from the sad looking html that I tested it on
 
+![Workflow Chart](http://i.imgur.com/Zch5fZU.jpg)
+
 #### Notable Milestones
 
 1. Had to read up on how to store data into a `json` file and how to use AJAX to extract it to be used in my quiz.
