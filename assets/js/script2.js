@@ -21,12 +21,14 @@ $(document).ready(function () {
   var chosen = {}
 
   // answer for question and scores
+  var p1Score = 35
+  var p2Score = 35
   var ans = ''
   var playerChoice1 = ''
   var playerChoice2 = ''
   var playTurn = 0
-  var p1Score = 0
-  var p2Score = 0
+  var p1Bets = 0
+  var p2Bets = 0
 
   // button id and urls of button
   var butUrl = {
@@ -41,7 +43,7 @@ $(document).ready(function () {
     p1Rolls = Math.random()
     p2Rolls = Math.random()
     if (p1Rolls > p2Rolls) {
-      console.log('player 1 starts first! Please choose the genres of question.') /* gotta change these 2 logs to alerts */
+      console.log('player 1 starts first! Please choose the genres of question.')
       return 1
     } else {
       console.log('player 2 starts first! Please choose the genres of question.')
@@ -52,18 +54,20 @@ $(document).ready(function () {
   // Roll to see who starts and show button of genres
   $('#roll').click(function () {
     rolls()
-    $('.genres').show()
-    $('#roll').hide()
+    $('.genres').fadeIn()
+    $('#roll').fadeOut()
+    $('#ins').fadeOut()
+    $('.cats').fadeIn()
   })
 
   // when click on any of the genres (put class for button and switch case for button id)
   $('.genres').click(function () {
     // new page layout for quiz section
-    $('.genres').hide()
+    $('.genres').fadeOut()
     $('.field').hide()
     $('.quizArea').show()
-    $('#showP1').text('Player 1 Score: ' + p1Score)
-    $('#showP2').text('Player 2 Score: ' + p2Score)
+    $('#showP1').text('Player 1 : ' + p1Score)
+    $('#showP2').text('Player 2 : ' + p2Score)
     id = this.id
     var choUrl = butUrl[id]
 
@@ -75,6 +79,9 @@ $(document).ready(function () {
     ourRequest.open('GET', choUrl)
     ourRequest.onload = function () {
       ourQn = JSON.parse(ourRequest.responseText)
+
+      // resetting the select tag to default before round sounds
+      $('.bets').prop('selectedIndex', 0)
 
       // randomizing the question to be chosen
       var qnPick = Math.floor(Math.random() * ourQn.length)
@@ -165,27 +172,48 @@ $(document).ready(function () {
     } else { console.log('one of the player has yet to make a choice') }
   }
 
+  $('.bets').change(function () {
+    comparAns(playerChoice1, playerChoice2, ans)
+  })
+
   // comparing player choices to answer
   function comparAns (p1, p2, sol) {
-    if (p1 === sol && p2 === sol) {
-      alert('Draw! everyone got it right')
-      scoreUpdate()
-    } else if (p1 === sol) {
-      alert('player 1 got it right')
-      console.log('p1')
-      p1Score++
-      scoreUpdate()
-    } else if (p2 === sol) {
-      alert('player 2 got it right')
-      alert('p2')
-      p2Score++
-      scoreUpdate()
-    } else if (!(p1 === sol && p2 === sol)) {
-      alert('both player got it wrong')
-      scoreUpdate()
-    }
-    if (nextGen() === true) {
-      addQns()
+    p1Bets = $('#p1Bets').val()
+    p2Bets = $('#p2Bets').val()
+    if (p1Bets === null || p2Bets === null) {
+      alert('Please place your wages')
+    } else {
+      console.log(p1Bets)
+      console.log(p2Bets)
+      if (p1 === sol && p2 === sol) {
+        alert('Draw! everyone got it right')
+        scoreUpdate()
+      } else if (p1 === sol) {
+        alert('player 1 got it right')
+        console.log('p1')
+        p2Score = (p2Score - p1Bets - p2Bets)
+        scoreUpdate()
+      } else if (p2 === sol) {
+        alert('player 2 got it right')
+        alert('p2')
+        p1Score = (p1Score - p2Bets - p1Bets)
+        scoreUpdate()
+      } else if (!(p1 === sol && p2 === sol)) {
+        alert('both player got it wrong')
+        p1Score = (p1Score - p1Bets)
+        p2Score = (p2Score - p2Bets)
+        scoreUpdate()
+      }
+      if (nextGen() === true) {
+        if (p1Score <= 0) {
+          alert('Player 2 wins!')
+        } else if (p2Score <= 0) {
+          alert('Player 1 wins!')
+        } else {
+          addQns()
+          $('.bets').prop('selectedIndex', 0)
+        }
+      }
     }
   }
 
@@ -261,8 +289,8 @@ $(document).ready(function () {
 
   // updating scores
   function scoreUpdate () {
-    $('#showP1').text('Player 1 Score: ' + p1Score)
-    $('#showP2').text('Player 2 Score: ' + p2Score)
+    $('#showP1').text('Player 1 : ' + p1Score)
+    $('#showP2').text('Player 2 : ' + p2Score)
   }
 
   // refresh trigger function
@@ -282,4 +310,13 @@ $(document).ready(function () {
     $source.src = songUrl
     document.getElementById('song').play()
   }
+
+  // modal boxes in landing page
+  $('#instrtext').hide()
+  $('#ins').click(function (event) {
+    $('#instrtext').show()
+  })
+  $('#closeinstrtext').click(function (event) {
+    $('#instrtext').hide()
+  })
 })
