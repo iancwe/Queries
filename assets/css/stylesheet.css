@@ -2,10 +2,10 @@ h1{
   font-weight: bold;
   text-align: center;
   font-size: 100px;
-  color: #550C18;
+  color: #566246;
   margin-bottom: 1em;
   padding-top: 3%;
-  font-family: 'Merriweather', serif;
+  font-family: 'Ubuntu', sans-serif;
 }
 
 header{
@@ -39,7 +39,7 @@ h2{
   padding: 15px;
   width: 25%;
   background-color: #DAE2DF;
-  border-radius: 5px;
+  border-radius: 8px;
   text-align: center;
   font-size: 35px;
   font-weight:bold;
@@ -99,19 +99,6 @@ body{
 
 #instrtext{
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50% ,-50%);
-  width: 1000px;
-  height: 400px;
-  border-radius: 5px;
-  background-color: #E2DADB;
-  text-align: center;
-}
-
-#instrtext2{
-  position: absolute;
-  display: none;
   top: 50%;
   left: 50%;
   transform: translate(-50% ,-50%);
@@ -184,16 +171,7 @@ body{
   border: #28262C;
 }
 
-#menu{
-  font-size: 20px;
-  padding: 10px 24px;
-  border-radius: 2px;
-  box-shadow: 5px 5px 15px 5px #272838;
-  background-color: #E2DADB;
-  border: #28262C;
-}
-
-#menu, #quit:hover{
+#quit:hover{
   background-color: #6D696A;
   transition: background-color 0.6s ease;
 }
@@ -223,4 +201,12 @@ span{
 
 #quiztitle{
   margin: auto 5%;
+}
+
+ol{
+  font-weight: bold;
+}
+
+#ramb{
+  font-weight: lighter;
 }

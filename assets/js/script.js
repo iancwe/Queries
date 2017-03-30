@@ -71,6 +71,7 @@ $(document).ready(function () {
     $('.genres').fadeOut()
     $('.field').hide()
     $('.quizArea').show()
+    $('.cats').hide()
     $('#showP1').text('Player 1 : ' + p1Score)
     $('#showP2').text('Player 2 : ' + p2Score)
     id = this.id
