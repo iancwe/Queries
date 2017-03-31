@@ -21,12 +21,13 @@ $(document).ready(function () {
   var chosen = {}
 
   // answer for question and scores
+  var p1Score = 35
+  var p2Score = 35
   var ans = ''
   var playerChoice1 = ''
   var playerChoice2 = ''
-  var playTurn = 0
-  var p1Score = 0
-  var p2Score = 0
+  var p1Bets = null
+  var p2Bets = null
 
   // button id and urls of button
   var butUrl = {
@@ -41,29 +42,38 @@ $(document).ready(function () {
     p1Rolls = Math.random()
     p2Rolls = Math.random()
     if (p1Rolls > p2Rolls) {
-      console.log('player 1 starts first! Please choose the genres of question.') /* gotta change these 2 logs to alerts */
-      return 1
+      swal(
+            'Player 1 gets to choose the category!',
+            'Better luck next time Player 2',
+            'info'
+          )
     } else {
-      console.log('player 2 starts first! Please choose the genres of question.')
-      return 2
+      swal(
+            'Player 2 gets to choose the category!',
+            'Tough luck Player 1',
+            'info'
+          )
     }
   }
 
   // Roll to see who starts and show button of genres
   $('#roll').click(function () {
     rolls()
-    $('.genres').show()
-    $('#roll').hide()
+    $('.genres').fadeIn()
+    $('#roll').fadeOut()
+    $('#ins').fadeOut()
+    $('.cats').fadeIn()
   })
 
   // when click on any of the genres (put class for button and switch case for button id)
   $('.genres').click(function () {
     // new page layout for quiz section
-    $('.genres').hide()
+    $('.genres').fadeOut()
     $('.field').hide()
     $('.quizArea').show()
-    $('#showP1').text('Player 1 Score: ' + p1Score)
-    $('#showP2').text('Player 2 Score: ' + p2Score)
+    $('.cats').hide()
+    $('#showP1').text('Player 1 : ' + p1Score)
+    $('#showP2').text('Player 2 : ' + p2Score)
     id = this.id
     var choUrl = butUrl[id]
 
@@ -75,6 +85,9 @@ $(document).ready(function () {
     ourRequest.open('GET', choUrl)
     ourRequest.onload = function () {
       ourQn = JSON.parse(ourRequest.responseText)
+
+      // resetting the select tag to default before round sounds
+      $('.bets').prop('selectedIndex', 0)
 
       // randomizing the question to be chosen
       var qnPick = Math.floor(Math.random() * ourQn.length)
@@ -153,7 +166,6 @@ $(document).ready(function () {
         }
       }
     })
-    playTurn++
   }
 
   // function for checking if both players made their choices
@@ -161,30 +173,67 @@ $(document).ready(function () {
     if (c1 && c2) {
       console.log('both player made their choices')
       comparAns(playerChoice1, playerChoice2, ans)
-    } else { console.log('one of the player has yet to make a choice') }
+    } else {
+      console.log('One of the player has yet to make a choice')
+    }
   }
 
   // comparing player choices to answer
   function comparAns (p1, p2, sol) {
+    p1Bets = $('#p1Bets').val()
+    p2Bets = $('#p2Bets').val()
+      // console.log(p1Bets)
+      // console.log(p2Bets)
     if (p1 === sol && p2 === sol) {
-      alert('Draw! everyone got it right')
+      swal({
+        title: 'Well Played',
+        text: 'Both of you know your stuff eh?',
+        timer: 1500
+      })
       scoreUpdate()
     } else if (p1 === sol) {
-      alert('player 1 got it right')
+      swal({
+        title: 'Hot Stuff, Player 1',
+        timer: 1500
+      })
       console.log('p1')
-      p1Score++
+      p2Score = (p2Score - p1Bets - p2Bets)
       scoreUpdate()
     } else if (p2 === sol) {
-      alert('player 2 got it right')
-      alert('p2')
-      p2Score++
+      swal({
+        title: 'Dayuum! Player 2',
+        timer: 1500
+      })
+      console.log('p2')
+      p1Score = (p1Score - p2Bets - p1Bets)
       scoreUpdate()
     } else if (!(p1 === sol && p2 === sol)) {
-      alert('both player got it wrong')
+      swal({
+        title: 'Seriously?!',
+        text: 'None of you got it?',
+        timer: 1500
+      })
+      p1Score = (p1Score - p1Bets)
+      p2Score = (p2Score - p2Bets)
       scoreUpdate()
     }
     if (nextGen() === true) {
-      addQns()
+      if (p1Score <= 0) {
+        swal({
+          title: 'Nice One, Player 2!',
+          text: 'GG no rematch Player 1',
+          timer: 8000
+        }, playAgain())
+      } else if (p2Score <= 0) {
+        swal({
+          title: 'WHOOHOOO Player 1',
+          text: 'Git Gud Player 2',
+          timer: 8000
+        }, playAgain())
+      } else {
+        addQns()
+        $('.bets').prop('selectedIndex', 0)
+      }
     }
   }
 
@@ -247,7 +296,10 @@ $(document).ready(function () {
     if (!(ourQn.length === 0)) {
       return true
     } else {
-      alert('Choose next genre')
+      swal({
+        title: 'Onto green pastures!',
+        timer: 1500
+      })
       $('.genres').show()
       $('.field').show()
       $('.quizArea').hide()
@@ -260,8 +312,8 @@ $(document).ready(function () {
 
   // updating scores
   function scoreUpdate () {
-    $('#showP1').text('Player 1 Score: ' + p1Score)
-    $('#showP2').text('Player 2 Score: ' + p2Score)
+    $('#showP1').text('Player 1 : ' + p1Score)
+    $('#showP2').text('Player 2 : ' + p2Score)
   }
 
   // refresh trigger function
@@ -280,5 +332,22 @@ $(document).ready(function () {
     $source = $('#song')[0]
     $source.src = songUrl
     document.getElementById('song').play()
+  }
+
+  // modal boxes in landing page
+  $('#instrtext').hide()
+  $('#ins').click(function (event) {
+    $('#instrtext').show()
+  })
+  $('#closeinstrtext').click(function (event) {
+    $('#instrtext').hide()
+  })
+
+  // play again
+  function playAgain () {
+    $('.quizArea').hide()
+    $('.field').show()
+    $('#roll').show()
+    $('#ins').show()
   }
 })
