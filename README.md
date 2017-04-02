@@ -1,4 +1,4 @@
-# Quizzical Hustle
+# Queries
 
 When knowledge mingles with gambling.
 

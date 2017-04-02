@@ -20,7 +20,7 @@ $(document).ready(function () {
   var picked = {}
   var chosen = {}
 
-  // answer for question and scores
+  // variables for scores/bets and player choices
   var p1Score = 35
   var p2Score = 35
   var ans = ''
