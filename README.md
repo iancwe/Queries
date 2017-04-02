@@ -6,7 +6,7 @@ What happens when you get a cultured game like a quiz and taint it with some vic
 
 ## Where to Play
 So what is this game or how does one even play this game, one might ask themselves. Fret not. Its easy as 1 tequila, 2 tequila, 3 tequila...
-[Quizzical Huster](https://wdi-sg.github.io/wdi-project-1-iancwe/)
+[Queries](https://wdi-sg.github.io/wdi-project-1-iancwe/)
 
 ## Getting Started
 Wanna help out create a larger question bank for the quiz? Solid.
