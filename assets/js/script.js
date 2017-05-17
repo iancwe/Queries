@@ -31,10 +31,10 @@ $(document).ready(function () {
 
   // button id and urls of button
   var butUrl = {
-    'musBtn': 'https://wdi-sg.github.io/wdi-project-1-iancwe/assets/music.json',
-    'movBtn': 'https://wdi-sg.github.io/wdi-project-1-iancwe/assets/movieqn.json',
-    'sciBtn': 'https://wdi-sg.github.io/wdi-project-1-iancwe/assets/science.json',
-    'pplBtn': 'https://wdi-sg.github.io/wdi-project-1-iancwe/assets/famPpl.json'
+    'musBtn': 'https://iancwe.github.io/Queries/assets/music.json',
+    'movBtn': 'https://iancwe.github.io/Queries/assets/movieqn.json',
+    'sciBtn': 'https://iancwe.github.io/Queries/assets/science.json',
+    'pplBtn': 'https://iancwe.github.io/Queries/assets/famPpl.json'
   }
 
   //  to check who starts first(chooses the question)
