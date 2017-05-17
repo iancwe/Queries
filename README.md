@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # Queries
 
 When knowledge mingles with gambling.
